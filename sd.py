@@ -26,7 +26,7 @@ def load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, o
     w = WeightsLoader()
     load_state_dict_to = []
     if output_vae:
-        vae = VAE()
+        vae = VAE(sd) ######## NEW
         w.first_stage_model = vae.first_stage_model
         load_state_dict_to = [w]
 
@@ -36,7 +36,7 @@ def load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, o
             clip_config['target'] = 'ldm.modules.encoders.modules.FrozenOpenCLIPEmbedder'
         else:
             clip_config['target'] = 'ldm.modules.encoders.modules.FrozenCLIPEmbedder'
-        clip = CLIP(config=clip_config, embedding_directory=embedding_directory)
+        clip = CLIP(clip_target=clip_config['target'], embedding_directory=embedding_directory) ######## NEW
         w.cond_stage_model = clip.cond_stage_model
         load_state_dict_to = [w]
 
