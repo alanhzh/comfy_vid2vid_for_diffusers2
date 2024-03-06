@@ -36,7 +36,7 @@ def load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, o
             clip_config['target'] = 'ldm.modules.encoders.modules.FrozenOpenCLIPEmbedder'
         else:
             clip_config['target'] = 'ldm.modules.encoders.modules.FrozenCLIPEmbedder'
-        clip = CLIP(clip_target=clip_config['target'], embedding_directory=embedding_directory) ######## NEW
+        clip = CLIP(clip_target=clip_config['target'], embedding_directory=embedding_directory) ######## !!!!!!!!!! 'str' object has no attribute 'params'
         w.cond_stage_model = clip.cond_stage_model
         load_state_dict_to = [w]
 
